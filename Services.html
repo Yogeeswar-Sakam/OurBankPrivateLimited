@@ -19,7 +19,7 @@
 						function loan(){
 							var loanstr = `
 												<h2>Please Enter the details for loan</h2>
-													<form name="f1" action="">
+													<form name="f1" onsubmit="return calculateEMIForLoan(loanAmount.value,loanROI.value,loanDuration.value)">
 													<h3>
 														Applicant : <input type="text" name="loanApplicant" required><br>
 														Amount : <input type="number" name="loanAmount" required><br>
@@ -67,8 +67,10 @@
 						}
 						function calculateEMIForLoan(loanAmount,loanROI,loanDuration){
 									console.log("Inside fn");
-									var emi= loanAmount*(1+loanROI*0.01)/(loanDuration*12)
+									var emi= loanAmount*(1+(loanROI.substring(0,loanROI.length-1))*0.01)/(loanDuration*12)
 									console.log(emi);
+									document.f1.loanEMI.value= emi;
+									return false;
 						}
 						function fixedDeposit(){
 							
